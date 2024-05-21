@@ -37,6 +37,19 @@ class _NumberGeneratorScreenState extends State<NumberGeneratorScreen> {
     noOfCount++;
   }
 
+  void _restartGame() {
+    setState(() {
+      _color = Colors.blue;
+      _firstNumber = 0;
+      _secondNumber = 0;
+      noOfCount = 1;
+      correctAnswer = 0;
+      incorrectAnswer = 0;
+      clickCount = 0;
+      _generateRandomNumber();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     bool canClick = clickCount < maxClicks;
@@ -213,13 +226,22 @@ class _NumberGeneratorScreenState extends State<NumberGeneratorScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Restart',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                        onPressed: _restartGame,
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.restart_alt_rounded,
+                                color: Colors.black),
+                            SizedBox(width: 10),
+                            Text(
+                              'Restart',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
